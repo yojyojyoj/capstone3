@@ -1,6 +1,6 @@
 import {Button, Form} from 'react-bootstrap';
 import {useState, useEffect, useContext} from 'react';
-import {Navigate} from 'react-router-dom';
+import { Navigate, Link } from 'react-router-dom';
 
 import UserContext from '../context/UserContext';
 
@@ -10,6 +10,7 @@ export default function Register(){
 	const {user} = useContext(UserContext);
 
 	const notyf = new Notyf();
+	
 
 	// State hooks to store the values of the input fields:
 	const [firstName, setFirstName] = useState('');
@@ -22,6 +23,7 @@ export default function Register(){
 	//this state will determine whether the register button is enabled or not
 	const [isActive, setIsActive] = useState(false);
 
+	 
 	
 	useEffect(()=> {
 		// What logic are we going to add so that we can activate and reactivate the the register button?
@@ -70,7 +72,8 @@ export default function Register(){
 				setConfirmPassword('');
 
 				notyf.success("Registration successful!");
-				
+				<Navigate to="/login" />
+
 			}else if(data.message === "Email invalid"){
 				notyf.error('Email is invalid');
 			}else if (data.message === "Mobile number invalid"){
@@ -90,7 +93,7 @@ export default function Register(){
 	return (
 		(user.id !== null) 
 		?
-		<Navigate to="/courses" />
+		<Navigate to="/login" />
 		:
 		<Form className ="col-6 mx-auto" onSubmit = {event => registerUser(event)}>
 			<h1 className = 'my-5 text-center'>Register</h1>
@@ -114,7 +117,6 @@ export default function Register(){
 		        	onChange = {event => setLastName(event.target.value)}
 		        	required/>
 		      </Form.Group>
-
 
 		      <Form.Group className="mb-3" >
 		        <Form.Label>Email address:</Form.Label>
@@ -148,10 +150,10 @@ export default function Register(){
 		      </Form.Group>
 
 		      <Form.Group className="mb-3">
-		        <Form.Label>Confirm Password:</Form.Label>
+		        <Form.Label>Verify Password:</Form.Label>
 		        <Form.Control 
 		        	type="password" 
-		        	placeholder="Confirm your Password" 
+		        	placeholder="Verify your Password" 
 		        	value = {confirmPassword}
 		        	onChange = {event => setConfirmPassword(event.target.value)}
 		        	required/>
@@ -164,11 +166,18 @@ export default function Register(){
 		      		</Button>
 		      	:
 		      		<Button variant="danger" type="submit" disabled>
-		        		Register
+		        		Please enter your registration details
 		      		</Button>
 		      }
-		      
-		      
+		      <Form.Group className="text-center mt-5">
+		        <Form.Label>Already have an account? </Form.Label>
+		        <Link to="/login" className="btn btn-link">
+		          Click here
+		        </Link>
+		        <Form.Label> to log in.</Form.Label>
+		      </Form.Group>
+		        
 		</Form>
+
 		)
 }

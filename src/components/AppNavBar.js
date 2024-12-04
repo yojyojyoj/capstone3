@@ -20,7 +20,7 @@ export default function AppNavBar(){
 	// console.log(user);
 
 	return (
-		<Navbar expand="lg" className="bg-body-tertiary">
+		<Navbar expand="lg" className="bg-body-tertiary" sticky="top">
 		      <Container>
 		        <Navbar.Brand as={NavLink} to="/">GY</Navbar.Brand>
 		        <Navbar.Toggle aria-controls="basic-navbar-nav" />

@@ -17,7 +17,7 @@ export default function Profile(){
     const [details,setDetails] = useState({});
 
     useEffect(() => {
-        fetch(`http://localhost:4000/users/details`, {
+        fetch(`http://localhost:4004/b4/users/details`, {
             headers: {
                 Authorization: `Bearer ${ localStorage.getItem('token') }`
             }
@@ -44,7 +44,7 @@ export default function Profile(){
 
     return (
         (user.id === null) ?
-            <Navigate to="/courses" />
+            <Navigate to="/products" />
             :
             <Container className="mt-5 p-5 text-white">               
             <Row className ="bg-primary">

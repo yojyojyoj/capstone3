@@ -1,7 +1,7 @@
 
 import { useState, useEffect, useContext } from 'react';
 import { Form, Button } from 'react-bootstrap';
-import { Navigate } from 'react-router-dom';
+import { Navigate, Link } from 'react-router-dom';
 
 import {Notyf} from 'notyf';
 
@@ -54,7 +54,7 @@ export default function Login() {
 
                 notyf.success('Successful Login');
             
-            } else if (data.message == "Email and password do not match") {
+            } else if (data.message === "Email and password do not match") {
 
                notyf.error(`Incorrect credentials. Try again!`);
 
@@ -145,6 +145,18 @@ export default function Login() {
                         Login
                     </Button>
                 }
-            </Form>       
+
+                <Form.Group className="text-center mt-5">
+                <Form.Label>Don't have an account yet? </Form.Label>
+                <Link to="/register" className="btn btn-link">
+                  Click here
+                </Link>
+                <Form.Label> to register.</Form.Label>
+              </Form.Group>
+                 
+            </Form> 
+            
+            
+
     )
 }

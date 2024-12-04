@@ -12,7 +12,7 @@ export default function ProductsCatalog(){
 		const [maxPrice, setMaxPrice] = useState('');
 
 	    const fetchData = () => {
-        let fetchUrl = user.isAdmin === true ? "http://localhost:4000/products/all" : "http://localhost:4000/products/";
+        let fetchUrl = user.isAdmin === true ? "http://localhost:4004/b4/products/all" : "http://localhost:4004/b4/products/";
 
 
         fetch(fetchUrl, {
