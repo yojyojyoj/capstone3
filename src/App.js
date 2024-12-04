@@ -9,6 +9,7 @@ import Login from './pages/Login';
 import Logout from './pages/Logout';
 import Error from './pages/Error';
 import Profile from './pages/Profile';
+import ProductsCatalog from './pages/ProductsCatalog';
 
 import { Container } from 'react-bootstrap';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
@@ -85,6 +86,7 @@ function App() {
                   <Route path="/login" element={<Login />} />
                   <Route path="/logout" element={<Logout />} />
                   <Route path="/profile" element={<Profile />} />
+                  <Route path="/products" element={<ProductsCatalog />} />
                   <Route path="*" element={<Error />} />
                 </Routes>
               </Container>
