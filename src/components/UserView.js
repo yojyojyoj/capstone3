@@ -27,7 +27,7 @@ export default function UserView({productsData}) {
 
     return(
         <>
-            <ProductSearch courses = {productsData} />
+            <ProductSearch products = {productsData} />
         </>
         )
 }

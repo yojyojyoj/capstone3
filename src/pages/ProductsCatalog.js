@@ -2,32 +2,44 @@ import { useState, useEffect, useContext } from 'react';
 import AdminView from '../components/AdminView';
 import ProductsCard from '../components/ProductsCard';
 import UserView from '../components/UserView';
+// import coursesData from '../data/coursesData';
 
 import UserContext from '../context/UserContext';
 
+export default function ProductsCatalog() {
 
-export default function ProductsCatalog(){
+    const {user} = useContext(UserContext);
 
-	const {user} = useContext(UserContext);
+    // Checks to see if the mock data was captured
+    // console.log(coursesData);
+    // console.log(coursesData[0]);
 
-		const [products, setProducts] = useState([]);
-		const [minPrice, setMinPrice] = useState('');
-		const [maxPrice, setMaxPrice] = useState('');
+    const [products, setProducts] = useState([]);
 
-	    const fetchData = () => {
-        let fetchUrl = user.isAdmin === true ? "http://localhost:4004/b4/products/all" : "http://localhost:4004/b4/products/";
+    // The "map" method loops through the individual course objects in our array and returns a component for each course
+    // Multiple components created through the map method must have a unique key that will help React JS identify which components/elements have been changed, added or removed
+    // Everytime the map method loops through the data, it creates a "CourseCard" component and then passes the current element in our coursesData array using the courseProp
+    // const courses = coursesData.map(course => {
+    //     return (
+    //         <CourseCard key={course.id} courseProp={course}/>
+    //     );
+    // })
 
+    const fetchData = () => {
+        let fetchUrl = user.isAdmin === true ? "http://localhost:4004/b4/products/all" : "http://localhost:4004/b4/products/active";
 
+        //get all active courses
         fetch(fetchUrl, {
-            // method : 'POST',
             headers : {
-                'Authorization' : `Bearer ${localStorage.getItem('token')}`,
-                'Content-Type' : 'application.json',
+                'Authorization' : `Bearer ${localStorage.getItem('token')}`
             }
         })
         .then(res => res.json())
         .then(data => {
+            
+            // console.log(data);
 
+            // Sets the "courses" state to map the data retrieved from the fetch request into several "CourseCard" components
             setProducts(data);
 
         });
@@ -36,40 +48,13 @@ export default function ProductsCatalog(){
     useEffect(() => {
         fetchData();
 
-    }, [user, minPrice, maxPrice]);
+    }, [user]);
 
-     return (
-        // <>
-        //     <div className="mt-5 p-5 text-white">
-        //         {/* Search Form for Price Range */}
-        //         <div>
-        //             <label htmlFor="minPrice">Min Price:</label>
-        //             <input 
-        //                 type="number" 
-        //                 id="minPrice" 
-        //                 value={minPrice} 
-        //                 onChange={(e) => setMinPrice(e.target.value)} 
-        //                 placeholder="Enter min price" 
-        //             />
-        //         </div>
-        //         <div>
-        //             <label htmlFor="maxPrice">Max Price:</label>
-        //             <input 
-        //                 type="number" 
-        //                 id="maxPrice" 
-        //                 value={maxPrice} 
-        //                 onChange={(e) => setMaxPrice(e.target.value)} 
-        //                 placeholder="Enter max price" 
-        //             />
-        //         </div>
-        //         <button onClick={fetchData}>Search</button>
-
-        //     </div>
-        // </>
+    return(
         (user.isAdmin === true)
         ?
             <AdminView productsData={products} fetchData = {fetchData} />
         :
             <UserView productsData={products} />
-    );
+    )
 }
