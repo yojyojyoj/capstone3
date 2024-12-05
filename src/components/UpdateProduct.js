@@ -22,7 +22,7 @@ export default function UpdateProduct({product, fetchData}){
 
 
 		// This function will update the product based on the state of the states:
-		const UpdateProduct = (event, productId) => {
+		const updateProduct = (event, productId) => {
 			// to avoide refreshing
 			event.preventDefault();
 			fetch(`http://localhost:4000/products/${productId}`,{
@@ -106,7 +106,7 @@ export default function UpdateProduct({product, fetchData}){
 			         <Button variant="secondary" onClick={handleClose}>
 			           Close
 			         </Button>
-			         <Button variant="success" onClick= {event => updateProduct(event, courseId)}>
+			         <Button variant="success" onClick= {event => updateProduct(event, productId)}>
 			           Save Changes
 			         </Button>
 			       </Modal.Footer>
@@ -115,3 +115,4 @@ export default function UpdateProduct({product, fetchData}){
 
 		</>
 		)
+}
