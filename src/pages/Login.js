@@ -1,6 +1,6 @@
 
 import { useState, useEffect, useContext } from 'react';
-import { Form, Button } from 'react-bootstrap';
+import { Form, Button, Card } from 'react-bootstrap';
 import { Navigate, Link } from 'react-router-dom';
 
 import {Notyf} from 'notyf';
@@ -113,38 +113,40 @@ export default function Login() {
             <Navigate to='/products'/>
             :    
             <Form onSubmit={(e) => authenticate(e)}>
-                <h1 className="my-5 text-center">Login</h1>
-                <Form.Group>
-                    <Form.Label>Email address</Form.Label>
-                    <Form.Control 
-                        type="email" 
-                        placeholder="Enter email" 
-                        required
-                        value={email}
-                        onChange={(e) => setEmail(e.target.value)}
-                    />
-                </Form.Group>
+            <h1 className="my-5 text-center">Login</h1>
+                <Card className= "p-3"> 
+                    <Form.Group>
+                        <Form.Label>Email address</Form.Label>
+                        <Form.Control 
+                            type="email" 
+                            placeholder="Enter your email" 
+                            required
+                            value={email}
+                            onChange={(e) => setEmail(e.target.value)}
+                        />
+                    </Form.Group>
 
-                <Form.Group className="mb-3">
-                    <Form.Label>Password</Form.Label>
-                    <Form.Control 
-                        type="password" 
-                        placeholder="Password" 
-                        required
-                        value={password}
-                        onChange={(e) => setPassword(e.target.value)}
-                    />
-                </Form.Group>
+                    <Form.Group className="mb-3">
+                        <Form.Label>Password</Form.Label>
+                        <Form.Control 
+                            type="password" 
+                            placeholder="Enter your password" 
+                            required
+                            value={password}
+                            onChange={(e) => setPassword(e.target.value)}
+                        />
+                    </Form.Group>
 
-                { isActive ? 
-                    <Button variant="primary" type="submit" id="loginBtn">
-                        Login
-                    </Button>
-                    : 
-                    <Button variant="danger" type="submit" id="loginBtn" disabled>
-                        Login
-                    </Button>
-                }
+                    { isActive ? 
+                        <Button variant="primary" type="submit" id="loginBtn">
+                            Login
+                        </Button>
+                        : 
+                        <Button variant="danger" type="submit" id="loginBtn" disabled>
+                            Login
+                        </Button>
+                    }
+                </Card>
 
                 <Form.Group className="text-center mt-5">
                 <Form.Label>Don't have an account yet? </Form.Label>

@@ -1,4 +1,4 @@
-import { Button, Form } from 'react-bootstrap';
+import { Button, Form, Card } from 'react-bootstrap';
 import { useState, useEffect, useContext } from 'react';
 import { useNavigate, Navigate, Link } from 'react-router-dom'; // Import useNavigate for programmatic navigation
 import UserContext from '../context/UserContext';
@@ -83,79 +83,81 @@ export default function Register() {
     : (
       <Form className="col-6 mx-auto" onSubmit={event => registerUser(event)}>
         <h1 className="my-5 text-center">Register</h1>
+        <Card className = "p-3">
+          <Form.Group className="mb-3">
+            <Form.Label>First Name:</Form.Label>
+            <Form.Control 
+              type="text" 
+              placeholder="Enter first name" 
+              value={firstName}
+              onChange={event => setFirstName(event.target.value)}
+              required
+            />
+          </Form.Group>
 
-        <Form.Group className="mb-3">
-          <Form.Label>First Name:</Form.Label>
-          <Form.Control 
-            type="text" 
-            placeholder="Enter first name" 
-            value={firstName}
-            onChange={event => setFirstName(event.target.value)}
-            required
-          />
-        </Form.Group>
+          <Form.Group className="mb-3">
+            <Form.Label>Last Name:</Form.Label>
+            <Form.Control 
+              type="text" 
+              placeholder="Enter last name" 
+              value={lastName}
+              onChange={event => setLastName(event.target.value)}
+              required
+            />
+          </Form.Group>
 
-        <Form.Group className="mb-3">
-          <Form.Label>Last Name:</Form.Label>
-          <Form.Control 
-            type="text" 
-            placeholder="Enter last name" 
-            value={lastName}
-            onChange={event => setLastName(event.target.value)}
-            required
-          />
-        </Form.Group>
+          <Form.Group className="mb-3">
+            <Form.Label>Email address:</Form.Label>
+            <Form.Control 
+              type="email" 
+              placeholder="Enter email" 
+              value={email}
+              onChange={event => setEmail(event.target.value)}
+              required
+            />
+          </Form.Group>
 
-        <Form.Group className="mb-3">
-          <Form.Label>Email address:</Form.Label>
-          <Form.Control 
-            type="email" 
-            placeholder="Enter email" 
-            value={email}
-            onChange={event => setEmail(event.target.value)}
-            required
-          />
-        </Form.Group>
+          <Form.Group className="mb-3">
+            <Form.Label>Mobile No:</Form.Label>
+            <Form.Control 
+              type="number" 
+              placeholder="Enter 11 Digit no." 
+              value={mobileNo}
+              onChange={event => setMobileNo(event.target.value)}
+              required
+            />
+          </Form.Group>
 
-        <Form.Group className="mb-3">
-          <Form.Label>Mobile No:</Form.Label>
-          <Form.Control 
-            type="number" 
-            placeholder="Enter 11 Digit no." 
-            value={mobileNo}
-            onChange={event => setMobileNo(event.target.value)}
-            required
-          />
-        </Form.Group>
+          <Form.Group className="mb-3">
+            <Form.Label>Password:</Form.Label>
+            <Form.Control 
+              type="password" 
+              placeholder="Password (at least 8 characters)" 
+              value={password}
+              onChange={event => setPassword(event.target.value)}
+              required
+            />
+          </Form.Group>
 
-        <Form.Group className="mb-3">
-          <Form.Label>Password:</Form.Label>
-          <Form.Control 
-            type="password" 
-            placeholder="Password (at least 8 characters)" 
-            value={password}
-            onChange={event => setPassword(event.target.value)}
-            required
-          />
-        </Form.Group>
+          <Form.Group className="mb-3">
+            <Form.Label>Verify Password:</Form.Label>
+            <Form.Control 
+              type="password" 
+              placeholder="Verify your Password" 
+              value={confirmPassword}
+              onChange={event => setConfirmPassword(event.target.value)}
+              required
+            />
+          </Form.Group>
+          <hr/>
 
-        <Form.Group className="mb-3">
-          <Form.Label>Verify Password:</Form.Label>
-          <Form.Control 
-            type="password" 
-            placeholder="Verify your Password" 
-            value={confirmPassword}
-            onChange={event => setConfirmPassword(event.target.value)}
-            required
-          />
-        </Form.Group>
-
-        {isActive ? 
-          <Button variant="primary" type="submit">Register</Button> :
-          <Button variant="danger" type="submit" disabled>
-            Please enter your registration details
-          </Button>
-        }
+          {isActive ? 
+            <Button variant="primary" type="submit">Register</Button> :
+            <Button variant="danger" type="submit" disabled>
+              Please enter your registration details
+            </Button>
+          }
+        </Card>
 
         <Form.Group className="text-center mt-5">
           <Form.Label>Already have an account? </Form.Label>
