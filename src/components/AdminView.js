@@ -2,8 +2,8 @@ import { useState, useEffect } from 'react';
 import { Button, Table } from 'react-bootstrap';
 
 // Import the button
-/*import EditCourse from './EditCourse';
-import ArchiveCourse from './ArchiveCourse'*/
+import UpdateProduct from './UpdateProduct';
+// import ArchiveCourse from './ArchiveCourse'
 
 
 export default function AdminView({ productsData, fetchData }) {
