@@ -6,25 +6,24 @@ import { Button, Table } from 'react-bootstrap';
 import ArchiveCourse from './ArchiveCourse'*/
 
 
-export default function AdminView({ coursesData, fetchData }) {
+export default function AdminView({ productsData, fetchData }) {
 
 
-    const [courses, setCourses] = useState([])
+    const [products, setProducts] = useState([])
 
 
-    //Getting the coursesData from the courses page
     useEffect(() => {
         // console.log(coursesData);
 
-        const coursesArr = coursesData.map(course => {
+        const productsArr = productsData.map(product => {
             return (
-                <tr key={course._id}>
-                    <td>{course._id}</td>
-                    <td>{course.name}</td>
-                    <td>{course.description}</td>
-                    <td>{course.price}</td>
-                    <td className={course.isActive ? "text-success" : "text-danger"}>
-                        {course.isActive ? "Available" : "Unavailable"}
+                <tr key={product._id}>
+                    <td>{product._id}</td>
+                    <td>{product.name}</td>
+                    <td>{product.description}</td>
+                    <td>{product.price}</td>
+                    <td className={product.isActive ? "text-success" : "text-danger"}>
+                        {product.isActive ? "Available" : "Unavailable"}
                     </td>
                     <td className="text-center">
                         {/*<EditCourse course = {course} fetchData = {fetchData}/>*/}
@@ -34,9 +33,9 @@ export default function AdminView({ coursesData, fetchData }) {
                 )
         })
 
-        setCourses(coursesArr)
+        setProducts(productsArr)
 
-    }, [coursesData])
+    }, [productsData])
 
 
     return(
@@ -56,7 +55,7 @@ export default function AdminView({ coursesData, fetchData }) {
                 </thead>
 
                 <tbody>
-                    {courses}
+                    {products}
                 </tbody>
             </Table>    
         </>
