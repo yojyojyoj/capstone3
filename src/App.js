@@ -10,6 +10,7 @@ import Logout from './pages/Logout';
 import Error from './pages/Error';
 import Profile from './pages/Profile';
 import ProductsCatalog from './pages/ProductsCatalog';
+import ProductView from './pages/ProductView';
 
 import { Container } from 'react-bootstrap';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
@@ -47,7 +48,7 @@ function App() {
           })
           .then(response => response.json())
           .then(data => {
-              console.log(data._id);
+              // console.log(data);
 
               if(data._id === undefined){
                 setUser({
@@ -87,6 +88,7 @@ function App() {
                   <Route path="/logout" element={<Logout />} />
                   <Route path="/profile" element={<Profile />} />
                   <Route path="/products" element={<ProductsCatalog />} />
+                  <Route path="/products/:productId" element={<ProductView />} />
                   <Route path="*" element={<Error />} />
                 </Routes>
               </Container>
