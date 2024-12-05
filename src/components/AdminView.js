@@ -3,7 +3,7 @@ import { Button, Table } from 'react-bootstrap';
 
 // Import the button
 import UpdateProduct from './UpdateProduct';
-// import ArchiveCourse from './ArchiveCourse'
+import ArchiveProducts from './ArchiveProducts'
 
 
 export default function AdminView({ productsData, fetchData }) {
@@ -28,7 +28,7 @@ export default function AdminView({ productsData, fetchData }) {
                     <td className="text-center">
                         {/*<EditCourse course = {course} fetchData = {fetchData}/>*/}
                     </td>
-                    {/*<td><ArchiveCourse course={course} isActive={course.isActive} fetchData={fetchData}/></td>*/}
+                    {<td><ArchiveProducts product={product} isActive={product.isActive} fetchData={fetchData}/></td>}
                 </tr>
                 )
         })
