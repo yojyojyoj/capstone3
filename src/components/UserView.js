@@ -1,33 +1,33 @@
 import { useState, useEffect } from 'react';
 import ProductsCard from './ProductsCard';
 
-import ProductSearch from './ProductSearch';
+// import ProductSearch from './ProductSearch';
 export default function UserView({productsData}) {
 
-    /*const [courses, setCourses] = useState([])
+    const [products, setProducts] = useState([])
 
     useEffect(() => {
-        // console.log(coursesData);
+        // console.log(productsData);
 
-        const coursesArr = coursesData.map(course => {
-            //only render the active courses
-            if(course.isActive === true) {
+        const productsArr = productsData.map(product => {
+            //only render the active products
+            if(product.isActive === true) {
                 return (
-                    <CourseCard courseProp={course} key={course._id}/>
+                    <ProductsCard productProp={product} key={product._id}/>
                     )
             } else {
                 return null;
             }
         })
 
-        //set the courses state to the result of our map function, to bring our returned course component outside of the scope of our useEffect where our return statement below can see.
-        setCourses(coursesArr)
+        //set the products state to the result of our map function, to bring our returned course component outside of the scope of our useEffect where our return statement below can see.
+        setProducts(productsArr)
 
-    }, [coursesData])*/
+    }, [productsData])
 
-    return(
+    /*return(
         <>
-            <ProductSearch courses = {productsData} />
+            <ProductSearch products = {productsData} />
         </>
-        )
+        )*/
 }
