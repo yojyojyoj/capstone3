@@ -83,8 +83,8 @@ export default function Login() {
             // console.log(data);
 
             setUser({
-                id: data._id,
-                isAdmin: data.isAdmin
+                id: data.user._id,
+                isAdmin: data.user.isAdmin
             })
         })
     }

@@ -26,7 +26,7 @@ export default function AdminView({ productsData, fetchData }) {
                         {product.isActive ? "Available" : "Unavailable"}
                     </td>
                     <td className="text-center">
-                        {/*<EditCourse course = {course} fetchData = {fetchData}/>*/}
+                        <UpdateProduct product = {product} fetchData = {fetchData}/>
                     </td>
                     {<td><ArchiveProducts product={product} isActive={product.isActive} fetchData={fetchData}/></td>}
                 </tr>
@@ -40,7 +40,7 @@ export default function AdminView({ productsData, fetchData }) {
 
     return(
         <>
-            <h1 className="text-center my-4"> Admin Dashboard</h1>
+            <h1 className="text-center my-4"> Admin Dashboard </h1>
             
             <Table striped bordered hover responsive>
                 <thead>

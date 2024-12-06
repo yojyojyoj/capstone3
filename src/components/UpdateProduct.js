@@ -25,7 +25,7 @@ export default function UpdateProduct({product, fetchData}){
 		const updateProduct = (event, productId) => {
 			// to avoide refreshing
 			event.preventDefault();
-			fetch(`http://localhost:4000/products/${productId}`,{
+			fetch(`http://localhost:4004/b4/products/${productId}/update`,{
 				method: "PATCH",
 				headers: {
 					'Content-Type' : 'application/json',

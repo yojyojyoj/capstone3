@@ -2,14 +2,13 @@ import { useState, useEffect, useContext } from 'react';
 import AdminView from '../components/AdminView';
 import ProductsCard from '../components/ProductsCard';
 import UserView from '../components/UserView';
-// import coursesData from '../data/coursesData';
 
 import UserContext from '../context/UserContext';
 
 export default function ProductsCatalog() {
 
     const {user} = useContext(UserContext);
-
+    console.log(user)
     // Checks to see if the mock data was captured
     // console.log(coursesData);
     // console.log(coursesData[0]);
@@ -27,6 +26,7 @@ export default function ProductsCatalog() {
 
     const fetchData = () => {
         let fetchUrl = user.isAdmin === true ? "http://localhost:4004/b4/products/all" : "http://localhost:4004/b4/products/active";
+        console.log(fetchUrl)
 
         //get all active courses
         fetch(fetchUrl, {
@@ -37,7 +37,7 @@ export default function ProductsCatalog() {
         .then(res => res.json())
         .then(data => {
             
-            // console.log(data);
+            console.log(data);
 
             // Sets the "courses" state to map the data retrieved from the fetch request into several "CourseCard" components
             setProducts(data);

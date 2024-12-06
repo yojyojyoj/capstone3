@@ -10,7 +10,7 @@ export default function ArchiveProducts({product, isActive, fetchData}) {
     const [productId, setProductId] = useState(product._id);
 
     const archiveToggle = () => {
-        fetch(`http://localhost:4004/products/${productId}/archive`, {
+        fetch(`http://localhost:4004/b4/products/${productId}/archive`, {
             method: 'PATCH',
             headers: {
                 'Content-Type': 'application/json',
@@ -36,7 +36,7 @@ export default function ArchiveProducts({product, isActive, fetchData}) {
 
 
         const activateToggle = () => {
-        fetch(`http://localhost:4004/products/${productId}/activate`, {
+        fetch(`http://localhost:4004/b4/products/${productId}/activate`, {
             method: 'PATCH',
             headers: {
                 'Content-Type': 'application/json',
@@ -64,7 +64,7 @@ export default function ArchiveProducts({product, isActive, fetchData}) {
         <>
             {isActive ?
 
-                <Button variant="danger" size="sm" onClick={() => archiveToggle()}>Archive</Button>
+                <Button variant="danger" size="sm" onClick={() => archiveToggle()}>Disable</Button>
 
                 :
 

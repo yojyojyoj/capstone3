@@ -48,17 +48,17 @@ function App() {
           })
           .then(response => response.json())
           .then(data => {
-              // console.log(data);
+              console.log(data);
 
-              if(data._id === undefined){
+              if(data.user._id === undefined){
                 setUser({
                   id:null,
                   isAdmin: null
                 })
               }else{
                 setUser({
-                  id: data._id,
-                  isAdmin: data.isAdmin
+                  id: data.user._id,
+                  isAdmin: data.user.isAdmin
                 })
               }
           })
