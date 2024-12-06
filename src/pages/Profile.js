@@ -28,7 +28,7 @@ export default function Profile(){
             // Set the user states values with the user details upon successful login.
             if (typeof data !== undefined) {
 
-                setDetails(data);
+                setDetails(data.user);
 
             } else if (data.error === "User not found") {
 

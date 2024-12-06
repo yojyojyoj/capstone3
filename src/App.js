@@ -42,43 +42,6 @@ function App() {
         //fetch to retrieve the user details
       
       if(localStorage.getItem('token')){
-          fetch(`${process.env.REACT_APP_API_BASE_URL}/products/details`, {
-            headers: {
-              Authorization: `Bearer ${localStorage.getItem('token')}`
-            }
-          })
-          .then(response => response.json())
-          .then(data => {
-              console.log(data);
-
-              if(data.user._id === undefined){
-                setUser({
-                  id:null,
-                  isAdmin: null
-                })
-              }else{
-                setUser({
-                  id: data.user._id,
-                  isAdmin: data.user.isAdmin
-                })
-              }
-          })
-
-      }else{
-        setUser({
-          id: null,
-          isAdmin:null
-        })
-        
-      }
-
-    }, [])
-
-
-    useEffect(()=> {
-        //fetch to retrieve the user details
-      
-      if(localStorage.getItem('token')){
           fetch(`${process.env.REACT_APP_API_BASE_URL}/users/details`, {
             headers: {
               Authorization: `Bearer ${localStorage.getItem('token')}`
@@ -110,6 +73,9 @@ function App() {
       }
 
     }, [])
+
+
+    
 
 
   return (
