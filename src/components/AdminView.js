@@ -1,9 +1,11 @@
+import '../index.css';
 import { useState, useEffect } from 'react';
 import { Button, Table } from 'react-bootstrap';
 
 // Import the button
 import UpdateProduct from './UpdateProduct';
-import ArchiveProducts from './ArchiveProducts'
+import ArchiveProducts from './ArchiveProducts';
+
 
 
 export default function AdminView({ productsData, fetchData }) {
@@ -17,8 +19,8 @@ export default function AdminView({ productsData, fetchData }) {
 
         const productsArr = productsData.map(product => {
             return (
-                <tr key={product._id}>
-                    <td>{product._id}</td>
+                <tr key={product._id} className = "text-center">
+                    {/*<td>{product._id}</td>*/}
                     <td>{product.name}</td>
                     <td>{product.description}</td>
                     <td>{product.price}</td>
@@ -42,10 +44,10 @@ export default function AdminView({ productsData, fetchData }) {
         <>
             <h1 className="text-center my-4"> Admin Dashboard </h1>
             
-            <Table striped bordered hover responsive>
+            <Table striped bordered hover responsive variant = "success">
                 <thead>
                     <tr className="text-center">
-                        <th>ID</th>
+                        {/*<th>ID</th>*/}
                         <th>Name</th>
                         <th>Description</th>
                         <th>Price</th>
