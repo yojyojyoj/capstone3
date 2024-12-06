@@ -1,6 +1,6 @@
 import '../index.css';
 import { useState, useEffect } from 'react';
-import { Button, Table } from 'react-bootstrap';
+import { Button, Table, Row, Col } from 'react-bootstrap';
 
 // Import the button
 import UpdateProduct from './UpdateProduct';
@@ -42,7 +42,14 @@ export default function AdminView({ productsData, fetchData }) {
 
     return(
         <>
-            <h1 className="text-center my-4"> Admin Dashboard </h1>
+        <Row className = "text-center">
+            <Col>
+             <h1 className="text-center my-4"> Admin Dashboard </h1>
+             <Button className="me-3 mb-4">Add Product</Button>
+             <Button className="me-3 mb-4 bg-success">Orders</Button>
+            </Col>
+        </Row>
+            
             
             <Table striped bordered hover responsive variant = "success">
                 <thead>

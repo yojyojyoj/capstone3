@@ -11,6 +11,7 @@ import Error from './pages/Error';
 import Profile from './pages/Profile';
 import ProductsCatalog from './pages/ProductsCatalog';
 import ProductView from './pages/ProductView';
+// import CartView from './components/CartView';
 
 import { Container } from 'react-bootstrap';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
@@ -74,6 +75,42 @@ function App() {
     }, [])
 
 
+    useEffect(()=> {
+        //fetch to retrieve the user details
+      
+      if(localStorage.getItem('token')){
+          fetch(`${process.env.REACT_APP_API_BASE_URL}/users/details`, {
+            headers: {
+              Authorization: `Bearer ${localStorage.getItem('token')}`
+            }
+          })
+          .then(response => response.json())
+          .then(data => {
+              console.log(data);
+
+              if(data.user._id === undefined){
+                setUser({
+                  id:null,
+                  isAdmin: null
+                })
+              }else{
+                setUser({
+                  id: data.user._id,
+                  isAdmin: data.user.isAdmin
+                })
+              }
+          })
+
+      }else{
+        setUser({
+          id: null,
+          isAdmin:null
+        })
+        
+      }
+
+    }, [])
+
 
   return (
     <>
@@ -87,6 +124,7 @@ function App() {
                   <Route path="/login" element={<Login />} />
                   <Route path="/logout" element={<Logout />} />
                   <Route path="/profile" element={<Profile />} />
+                  {/*<Route path="/cart" element={<CartView />} />*/}
                   <Route path="/products" element={<ProductsCatalog />} />
                   <Route path="/products/:productId" element={<ProductView />} />
                   <Route path="*" element={<Error />} />
