@@ -7,11 +7,11 @@ export default function Banner({data}){
 	const {title, content, destination, buttonLabel} = data;
 	
 	return (
-		<Row>
+		<Row className = "text-center mt-3">
 		    <Col>
 		         <h1>{title}</h1>
 		         <p>{content}</p>
-		         <Link variant="primary"to={destination}>{buttonLabel}</Link>
+		         <Button as= { Link }variant="primary" to={destination}>{buttonLabel}</Button>
 		    </Col>
 		</Row>
 		)

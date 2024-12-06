@@ -110,7 +110,7 @@ export default function Login() {
 
         (user.id !== null)
             ?
-            <Navigate to='/products'/>
+            <Navigate to='/'/>
             :    
             <Form onSubmit={(e) => authenticate(e)}>
             <h1 className="my-5 text-center">Login</h1>

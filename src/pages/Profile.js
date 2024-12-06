@@ -43,7 +43,7 @@ export default function Profile(){
     }, [])
 
     return (
-        (user.id === null) ?
+        (user._id === null) ?
             <Navigate to="/products" />
             :
             <Container className="mt-5 p-5 text-white">               

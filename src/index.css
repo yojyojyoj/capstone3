@@ -8,3 +8,8 @@
 .cardHighlight{
   min-height: 100%;
 }
+
+#nav{
+  background-color: #606c62;
+  color: white;
+}
