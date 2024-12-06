@@ -37,7 +37,7 @@ export default function Register() {
     console.log("Register button is clicked");
 
     // Send a request to register a user in the API
-    fetch('http://localhost:4004/b4/users/register', {
+    fetch(`${process.env.REACT_APP_API_BASE_URL}/users/register`, {
       method: 'POST',
       headers: {
         "Content-Type": 'application/json',

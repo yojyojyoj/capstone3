@@ -10,7 +10,7 @@ export default function FeaturedProducts(){
 
 
 	useEffect(() => {
-		fetch("http://localhost:4004/b4/products/")
+		fetch(`${process.env.REACT_APP_API_BASE_URL}/products/`)
 		.then(response => response.json())
 		.then(data => {
 

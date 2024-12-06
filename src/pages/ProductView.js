@@ -27,7 +27,7 @@ export default function ProductView(){
 
 		// console.log(courseId);
 		// fetch to get the info/data of a specific course:
-		fetch(`http://localhost:4004/b4/products/${productId}`)
+		fetch(`${process.env.REACT_APP_API_BASE_URL}/products/${productId}`)
 		.then(response => response.json())
 		.then(data => {
 			// console.log(data);

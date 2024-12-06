@@ -10,7 +10,7 @@ export default function ArchiveProducts({product, isActive, fetchData}) {
     const [productId, setProductId] = useState(product._id);
 
     const archiveToggle = () => {
-        fetch(`http://localhost:4004/b4/products/${productId}/archive`, {
+        fetch(`${process.env.REACT_APP_API_BASE_URL}/products/${productId}/archive`, {
             method: 'PATCH',
             headers: {
                 'Content-Type': 'application/json',
@@ -36,7 +36,7 @@ export default function ArchiveProducts({product, isActive, fetchData}) {
 
 
         const activateToggle = () => {
-        fetch(`http://localhost:4004/b4/products/${productId}/activate`, {
+        fetch(`${process.env.REACT_APP_API_BASE_URL}/products/${productId}/activate`, {
             method: 'PATCH',
             headers: {
                 'Content-Type': 'application/json',

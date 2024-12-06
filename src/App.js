@@ -41,7 +41,7 @@ function App() {
         //fetch to retrieve the user details
       
       if(localStorage.getItem('token')){
-          fetch('http://localhost:4004/b4/users/details', {
+          fetch(`${process.env.REACT_APP_API_BASE_URL}/products/details`, {
             headers: {
               Authorization: `Bearer ${localStorage.getItem('token')}`
             }

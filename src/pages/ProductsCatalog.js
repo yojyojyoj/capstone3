@@ -25,7 +25,7 @@ export default function ProductsCatalog() {
     // })
 
     const fetchData = () => {
-        let fetchUrl = user.isAdmin === true ? "http://localhost:4004/b4/products/all" : "http://localhost:4004/b4/products/active";
+        let fetchUrl = user.isAdmin === true ? `${process.env.REACT_APP_API_BASE_URL}/products/all` : `${process.env.REACT_APP_API_BASE_URL}/products/active`;
         console.log(fetchUrl)
 
         //get all active courses
