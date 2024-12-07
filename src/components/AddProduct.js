@@ -1,5 +1,5 @@
 import { useState, useEffect, useContext } from 'react';
-import { Form,Button } from 'react-bootstrap';
+import { Modal, Button, Form } from 'react-bootstrap';
 import { Navigate, useNavigate } from 'react-router-dom';
 
 import UserContext from '../context/UserContext';
@@ -7,6 +7,11 @@ import UserContext from '../context/UserContext';
 import { Notyf } from 'notyf';
 
 export default function AddProduct(){
+
+    const [show, setShow] = useState(false);
+
+    const handleClose = () => setShow(false);
+    const handleShow = () => setShow(true);
 
     const notyf = new Notyf();
 
@@ -19,10 +24,10 @@ export default function AddProduct(){
     const [description,setDescription] = useState("");
     const [price,setPrice] = useState("");
 
-    function createProduct(e){
+    function createProduct(event){
 
         //prevent submit event's default behavior
-        e.preventDefault();
+        event.preventDefault();
 
         let token = localStorage.getItem('token');
         console.log(token);
@@ -69,11 +74,18 @@ export default function AddProduct(){
 
     return (
 
+
             (user.isAdmin === true)
             ?
             <>
-                <h1 className="my-5 text-center">Add Product</h1>
-                <Form onSubmit={e => createCourse(e)}>
+                <Button className = "bg-primary me-3 mb-4" onClick={handleShow} >Add Product</Button>
+
+                <Modal show={show} onHide={handleClose}>
+                       <Modal.Header closeButton>
+                         <Modal.Title>Add New Product</Modal.Title>
+                       </Modal.Header>
+                       <Modal.Body>
+                          <Form onSubmit={e => createProduct(e)}>
                     <Form.Group>
                         <Form.Label>Name:</Form.Label>
                         <Form.Control
@@ -105,7 +117,20 @@ export default function AddProduct(){
                         />
                     </Form.Group>
                     <Button variant="primary" type="submit" className="my-5">Submit</Button>
-                </Form>
+                </Form> 
+
+                       </Modal.Body>
+                       <Modal.Footer>
+                         <Button variant="secondary" onClick={handleClose}>
+                           Close
+                         </Button>
+                         <Button variant="success" onClick= {event => createProduct(event)}>
+                           Submit
+                         </Button>
+                       </Modal.Footer>
+                     </Modal>
+
+
             </>
             :
             <Navigate to="/products" />

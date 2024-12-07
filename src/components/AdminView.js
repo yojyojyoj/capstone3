@@ -5,6 +5,7 @@ import { Button, Table, Row, Col } from 'react-bootstrap';
 // Import the button
 import UpdateProduct from './UpdateProduct';
 import ArchiveProducts from './ArchiveProducts';
+import AddProduct from './AddProduct';
 
 
 
@@ -45,8 +46,13 @@ export default function AdminView({ productsData, fetchData }) {
         <Row className = "text-center">
             <Col>
              <h1 className="text-center my-4"> Admin Dashboard </h1>
-             <Button className="me-3 mb-4">Add Product</Button>
-             <Button className="me-3 mb-4 bg-success">Orders</Button>
+            </Col>
+        </Row>
+
+        <Row className = "text-center">
+            <Col>
+            <AddProduct product = {products} fetchData = {fetchData}/>
+            <Button className="me-3 mb-4 bg-success">Orders</Button>
             </Col>
         </Row>
             

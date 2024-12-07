@@ -57,8 +57,6 @@ export default function UpdateProduct({product, fetchData}){
 		<>
 			<Button variant = "primary" size = "sm" onClick={handleShow} >Update</Button>
 
-			{/*Edit Modal*/}
-
 			<Modal show={show} onHide={handleClose}>
 			       <Modal.Header closeButton>
 			         <Modal.Title>Update Product</Modal.Title>

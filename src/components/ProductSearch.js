@@ -30,7 +30,7 @@ const ProductSearch = ({ products }) => {
                 <ProductsCard productProp = {product} key = {product._id}/>
               ))
             ) : (
-              <ListGroup.Item>No courses found</ListGroup.Item>
+              <ListGroup.Item>No products found</ListGroup.Item>
             )}
           </ListGroup>
         </Col>
