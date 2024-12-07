@@ -116,7 +116,6 @@ export default function AddProduct(){
                             onChange={e => {setPrice(e.target.value)}}
                         />
                     </Form.Group>
-                    <Button variant="primary" type="submit" className="my-5">Submit</Button>
                 </Form> 
 
                        </Modal.Body>
