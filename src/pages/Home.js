@@ -1,7 +1,7 @@
 import Banner from '../components/Banner';
 // import Highlights from '../components/Highlights';
 // import CourseCard from '../components/CourseCard';
-// import FeaturedCourses from '../components/FeaturedCourses';
+import FeaturedProducts from '../components/FeaturedProducts';
 
 export default function Home(){
 	const data = {
@@ -14,7 +14,7 @@ export default function Home(){
 	return (
 		<>
 			<Banner data = {data}/>
-			
+			<FeaturedProducts />
 		</>
 		)
 }
