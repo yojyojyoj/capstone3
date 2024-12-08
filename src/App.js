@@ -11,7 +11,7 @@ import Error from './pages/Error';
 import Profile from './pages/Profile';
 import ProductsCatalog from './pages/ProductsCatalog';
 import ProductView from './pages/ProductView';
-// import CartView from './components/CartView';
+import CartView from './components/CartView';
 
 import { Container } from 'react-bootstrap';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
