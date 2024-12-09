@@ -56,7 +56,7 @@ export default function CartView(){
                         </Row>
                       </>
                     ) : (
-                      <h1>Your cart is empty! <Link to="/products">Start shopping.</Link></h1>
+                      <h1 className='text-center mt-5'>Your cart is empty! <Link to="/products">Start shopping.</Link></h1>
                     )
 
                   ) : null}
