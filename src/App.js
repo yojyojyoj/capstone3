@@ -11,6 +11,7 @@ import Error from './pages/Error';
 import Profile from './pages/Profile';
 import ProductsCatalog from './pages/ProductsCatalog';
 import ProductView from './pages/ProductView';
+// import Cart from './pages/Cart';
 import CartView from './components/CartView';
 
 import { Container } from 'react-bootstrap';
@@ -90,7 +91,7 @@ function App() {
                   <Route path="/login" element={<Login />} />
                   <Route path="/logout" element={<Logout />} />
                   <Route path="/profile" element={<Profile />} />
-                  {/*<Route path="/cart" element={<CartView />} />*/}
+                  <Route path="/cart" element={<CartView />} />
                   <Route path="/products" element={<ProductsCatalog />} />
                   <Route path="/products/:productId" element={<ProductView />} />
                   <Route path="*" element={<Error />} />
