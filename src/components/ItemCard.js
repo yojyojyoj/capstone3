@@ -3,7 +3,7 @@ import { Navigate, useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2'
 
 export default function ItemCard({item}) {
-    console.log(item);
+    console.log('ItemCard received item:', item);
 
   const { _id, name, description, status} = item;
     const navigate = useNavigate();

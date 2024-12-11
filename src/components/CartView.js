@@ -20,7 +20,7 @@ export default function CartView(){
     })
     .then(res => res.json())
     .then(data => {
-      console.log(data);
+      console.log('API Response:',data);
 
         if (Array.isArray(data.cart)) {
             setCart(data.cart);
@@ -50,7 +50,7 @@ export default function CartView(){
                         <Row>
                           {cart.map((item, index) => (
                             <Col md={3} key={index}>
-                              <ItemCard product={item} />
+                              <ItemCard item={item} />
                             </Col>
                           ))}
                         </Row>
