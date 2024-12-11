@@ -11,7 +11,7 @@ export default function CartView(){
   
   const getCart = () => {
       
-    fetch(`${process.env.REACT_APP_API_BASE_URL}/cart`, {
+    fetch(`${process.env.REACT_APP_API_BASE_URL}/cart/get-cart`, {
 
       method: 'GET',
       headers: {
