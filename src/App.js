@@ -17,7 +17,7 @@ import CartView from './components/CartView';
 import { Container } from 'react-bootstrap';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { UserProvider } from './context/UserContext';
-import { CartProvider } from './context/CartContext';
+// import { CartProvider } from './context/CartContext';
 
 import {useState, useEffect} from 'react';
 
@@ -83,7 +83,6 @@ function App() {
   return (
     <>
         <UserProvider value = {{user, setUser, unsetUser}}>
-          <CartProvider>
             <Router>
               <AppNavBar/>
               <Container>
@@ -100,7 +99,6 @@ function App() {
                 </Routes>
               </Container>
             </Router>
-          </CartProvider>
         </UserProvider>
     </>
   );
