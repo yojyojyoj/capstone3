@@ -8,6 +8,7 @@ export default function CartView(){
 
   const { user } = useContext(UserContext); 
   const [cart, setCart] = useState([]);
+  console.log("cart",cart); // Check the initial value of the cart state
   
   const getCart = () => {
       
@@ -21,10 +22,13 @@ export default function CartView(){
     .then(res => res.json())
     .then(data => {
       console.log('API Response:',data);
+      console.log('data.cart:', data.cart);
 
         if (Array.isArray(data.cart)) {
+            console.log('Setting cart to:', data.cart); // Check the data being passed to setCart
             setCart(data.cart);
             } else {
+              console.log('Setting cart to empty array'); // Check the data being passed to setCart
             setCart([]);;
         }
       })
@@ -35,9 +39,9 @@ export default function CartView(){
   };
 
     useEffect(() => {
-
-    getCart()
-
+      getCart();
+      console.log("AFTER",cart); // Check the value of the cart state after getCart is called
+    
     }, []);
 
 
