@@ -105,7 +105,7 @@ export default function CartView() {
     })
       .then(res => res.json())
       .then(data => {
-        if (data.error) {
+        if (data.message === 'Item not found in cart') {
           Swal.fire({
             icon: 'error',
             title: 'Removal Failed',
@@ -165,13 +165,13 @@ export default function CartView() {
           });
         }
       })
-      .catch((error) => {
+    /*  .catch((error) => {
         Swal.fire({
           icon: 'error',
           title: 'Error',
           text: 'Something went wrong during checkout. Please try again later.',
         });
-      });
+      });*/
   };
 
   // Handle clear cart
@@ -200,13 +200,13 @@ export default function CartView() {
           });
         }
       })
-      .catch(() => {
+      /*.catch(() => {
         Swal.fire({
           icon: 'error',
           title: 'Error',
           text: 'Something went wrong while clearing the cart. Please try again later.',
         });
-      });
+      });*/
   };
 
   return (

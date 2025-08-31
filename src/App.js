@@ -11,13 +11,13 @@ import Error from './pages/Error';
 import Profile from './pages/Profile';
 import ProductsCatalog from './pages/ProductsCatalog';
 import ProductView from './pages/ProductView';
-// import Cart from './pages/Cart';
+import Cart from './pages/Cart';
 import CartView from './components/CartView';
 
 import { Container } from 'react-bootstrap';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { UserProvider } from './context/UserContext';
-// import { CartProvider } from './context/CartContext';
+import { CartProvider } from './context/CartContext';
 
 import {useState, useEffect} from 'react';
 

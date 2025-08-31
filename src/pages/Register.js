@@ -71,9 +71,10 @@ export default function Register() {
         notyf.error('Mobile number is invalid');
       } else if (data.message === "Password must be at least 8 characters") {
         notyf.error("Password must be at least 8 characters");
-      } else {
-        notyf.error("Something went wrong!");
-      }
+      } 
+      // else {
+      //   notyf.error("Something went wrong!");
+      // }
     });
   };
 

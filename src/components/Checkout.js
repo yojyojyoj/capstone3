@@ -41,13 +41,13 @@ export default function Checkout() {
           });
         }
       })
-      .catch((error) => {
+      /*.catch((error) => {
         Swal.fire({
           icon: 'error',
           title: 'Error',
           text: 'Something went wrong during checkout. Please try again later.',
         });
-      });
+      });*/
   };
 
   return (

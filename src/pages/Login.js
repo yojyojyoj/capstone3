@@ -68,7 +68,7 @@ export default function Login() {
     }
 
     function retrieveUserDetails(token){
-        // console.log("I am from retrieve function: " + token);
+        console.log("I am from retrieve function: " + token);
 
         fetch(`${process.env.REACT_APP_API_BASE_URL}/users/details`, 
             {
@@ -83,7 +83,7 @@ export default function Login() {
             // console.log(data);
 
             setUser({
-                id: data.user._id,
+                id: data.user.id,
                 isAdmin: data.user.isAdmin
             })
         })
