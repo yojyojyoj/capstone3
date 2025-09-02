@@ -13,6 +13,7 @@ import ProductsCatalog from './pages/ProductsCatalog';
 import ProductView from './pages/ProductView';
 import Cart from './pages/Cart';
 import CartView from './components/CartView';
+import MyOrders from './pages/MyOrders';
 
 import { Container } from 'react-bootstrap';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
@@ -51,7 +52,7 @@ function App() {
           })
           .then(response => response.json())
           .then(data => {
-              console.log(data);
+              // console.log(data);
 
               if(data.user._id === undefined){
                 setUser({
@@ -95,6 +96,7 @@ function App() {
                   <Route path="/cart" element={<CartView />} />
                   <Route path="/products" element={<ProductsCatalog />} />
                   <Route path="/products/:productId" element={<ProductView />} />
+                  <Route path="/orders/my-orders" element={<MyOrders />} />
                   <Route path="*" element={<Error />} />
                 </Routes>
               </Container>

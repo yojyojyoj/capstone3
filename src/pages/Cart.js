@@ -68,7 +68,7 @@ export default function Cart() {
             </div>
           </>
         ) : (
-          <h1>Your cart is empty! <Link to="/products">Start shopping.</Link></h1>
+          <h6>Your cart is empty! <Link to="/products">Start shopping</Link></h6>
         )
       ) : (
         <h1>Please log in to view your cart.</h1>

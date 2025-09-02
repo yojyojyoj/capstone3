@@ -15,7 +15,7 @@ export default function PreviewProducts(props){
 		            <Card.Title className="text-center">
 		                <Link to = {`/products/${_id}`}>{name}</Link>
 		            </Card.Title>
-		            <Card.Text>{description}</Card.Text>
+		            <Card.Text className="text-center">{description}</Card.Text>
 		                    
 		        </Card.Body>
 		        <Card.Footer>

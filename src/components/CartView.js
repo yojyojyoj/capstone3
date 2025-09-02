@@ -1,11 +1,15 @@
 import React, { useState, useEffect, useContext } from 'react';
 import UserContext from '../context/UserContext';
-import { Link } from 'react-router-dom';
+import { useParams, useNavigate, Link } from 'react-router-dom';
 import Swal from 'sweetalert2';
 import { Button, InputGroup, FormControl, Row, Col } from 'react-bootstrap';
 
 export default function CartView() {
+  const navigate = useNavigate();
+  const { productId } = useParams();
   const { user } = useContext(UserContext);
+  const [name, setName] = useState('');
+
   const [cartItems, setCartItems] = useState([]);
   const [totalPrice, setTotalPrice] = useState(0);
 
@@ -59,7 +63,7 @@ export default function CartView() {
       method: 'PATCH',
       headers: {
         'Content-Type': 'application/json',
-        Authorization: `Bearer ${localStorage.getItem('token')}`,
+        Authorization: `Bearer ${localStorage.getItem('token')}`
       },
       body: JSON.stringify({
         productId: productId,
@@ -68,146 +72,203 @@ export default function CartView() {
     })
       .then(res => res.json())
       .then(data => {
-        if (data.message === "Item or product not found.") {
+        if (data.message === "Item quantity updated successfully.") {
           Swal.fire({
-            icon: 'error',
-            title: 'Update Failed',
+            icon: 'success',
+            title: 'Quantity Updated',
             text: data.message,
           });
           // Revert the local state if backend update fails
           getCart(); // Refresh the cart from the backend in case of failure
         } else {
           Swal.fire({
-            icon: 'success',
-            title: 'Quantity Updated',
+            icon: 'error',
+            title: 'Update Failed',
+            text: data.message,
           });
           getCart(); // Refresh the cart after successful update
         }
       })
-      .catch(() => {
-        Swal.fire({
-          icon: 'error',
-          title: 'Error',
-          text: 'Failed to update cart quantity.',
-        });
-        // Refresh the cart from the backend if an error occurs
-        getCart();
-      });
+      // .catch(() => {
+      //   Swal.fire({
+      //     icon: 'error',
+      //     title: 'Error',
+      //     text: 'Failed to update cart quantity.',
+      //   });
+      //   // Refresh the cart from the backend if an error occurs
+      //   getCart();
+      // });
   };
 
   const removeFromCart = (productId) => {
-    fetch(`${process.env.REACT_APP_API_BASE_URL}/cart/${productId}/remove-from-cart`, {
-      method: 'DELETE',
-      headers: {
-        'Content-Type': 'application/json',
-        Authorization: `Bearer ${localStorage.getItem('token')}`,
-      },
+  fetch(`${process.env.REACT_APP_API_BASE_URL}/cart/${productId}/remove-from-cart`, {
+    method: 'PATCH', // Use PATCH to match your backend
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${localStorage.getItem('token')}`,
+    },
+  })
+    .then(async (res) => {
+      const data = await res.json();
+
+      if (res.ok && data.message === 'Item removed from cart successfully') {
+        Swal.fire({
+          icon: 'success',
+          title: 'Item Removed',
+          text: data.message,
+        });
+        getCart(); // Refresh the cart after removal
+      } else {
+        Swal.fire({
+          icon: 'error',
+          title: 'Removal Failed',
+          text: data.message || 'Could not remove item from cart.',
+        });
+      }
     })
-      .then(res => res.json())
-      .then(data => {
-        if (data.message === 'Item not found in cart') {
-          Swal.fire({
-            icon: 'error',
-            title: 'Removal Failed',
-            text: data.message,
-          });
-        } else {
-          Swal.fire({
-            icon: 'success',
-            title: 'Item Removed',
-          });
-          getCart();
-        }
+    .catch((err) => {
+      console.error('Error removing item from cart:', err);
+      Swal.fire({
+        icon: 'error',
+        title: 'Error',
+        text: 'Something went wrong while removing the item. Please try again later.',
       });
-  };
+    });
+};
+
 
   // Handle checkout
-  const handleCheckout = () => {
-    if (!user?.id) {
-      Swal.fire({
-        icon: 'error',
-        title: 'Please Login',
-        text: 'You need to be logged in to checkout!',
-      });
-      return;
-    }
+const handleCheckout = () => {
+  if (!user?.id) {
+    Swal.fire({
+      icon: 'error',
+      title: 'Please Login',
+      text: 'You need to be logged in to checkout!',
+    });
+    return;
+  }
 
-    if (cartItems.length === 0) {
-      Swal.fire({
-        icon: 'error',
-        title: 'Empty Cart',
-        text: 'Your cart is empty! Add items to the cart before proceeding.',
-      });
-      return;
-    }
+  if (cartItems.length === 0) {
+    Swal.fire({
+      icon: 'error',
+      title: 'Empty Cart',
+      text: 'Your cart is empty! Add items to the cart before proceeding.',
+    });
+    return;
+  }
 
-    fetch(`${process.env.REACT_APP_API_BASE_URL}/checkout`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        Authorization: `Bearer ${localStorage.getItem('token')}`,
-      },
-    })
-      .then((response) => response.json())
-      .then((data) => {
-        if (data.message === 'Ordered Successfully') {
-          Swal.fire({
-            icon: 'success',
-            title: 'Checkout Successful',
-            text: 'Your order has been placed!',
-          });
-          // Optionally, you can clear the cart here by calling getCart()
-        } else {
-          Swal.fire({
-            icon: 'error',
-            title: 'Checkout Failed',
-            text: data.message || 'There was an issue with your checkout.',
-          });
-        }
-      })
-    /*  .catch((error) => {
+  fetch(`${process.env.REACT_APP_API_BASE_URL}/orders/checkout`, {
+    method: 'POST', // Use POST to match backend
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${localStorage.getItem('token')}`,
+    },
+  })
+    .then(async (res) => {
+      const data = await res.json();
+
+      if (res.ok && data.message === 'Ordered Successfully') {
+        Swal.fire({
+          icon: 'success',
+          title: 'Checkout Successful',
+          text: 'Your order has been placed!',
+        });
+         handleCheckClear();
+         navigate('/orders/my-orders'); 
+      } else {
         Swal.fire({
           icon: 'error',
-          title: 'Error',
-          text: 'Something went wrong during checkout. Please try again later.',
+          title: 'Checkout Failed',
+          text: data.message || 'There was an issue with your checkout.',
         });
-      });*/
-  };
-
-  // Handle clear cart
-  const handleClearCart = () => {
-    fetch(`${process.env.REACT_APP_API_BASE_URL}/cart/clear-cart`, {
-      method: 'DELETE',
-      headers: {
-        'Content-Type': 'application/json',
-        Authorization: `Bearer ${localStorage.getItem('token')}`,
-      },
+      }
     })
-      .then(res => res.json())
-      .then(data => {
-        if (data.message === 'Cart cleared successfully') {
-          Swal.fire({
-            icon: 'success',
-            title: 'Cart Cleared',
-            text: 'Your cart has been cleared successfully.',
-          });
-          getCart(); // Refresh the cart after clearing
-        } else {
-          Swal.fire({
-            icon: 'error',
-            title: 'Clear Cart Failed',
-            text: data.message || 'There was an issue clearing the cart.',
-          });
-        }
-      })
-      /*.catch(() => {
+    .catch((error) => {
+      console.error('Checkout error:', error);
+      Swal.fire({
+        icon: 'error',
+        title: 'Error',
+        text: 'Something went wrong during checkout. Please try again later.',
+      });
+    });
+};
+
+
+// Handle clear cart when checking out - called function in Checkout
+const handleCheckClear = () => {
+  fetch(`${process.env.REACT_APP_API_BASE_URL}/cart/clear-cart`, {
+    method: 'PUT', // Use PUT to match your backend
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${localStorage.getItem('token')}`,
+    },
+  })
+    .then(async (res) => {
+      const data = await res.json();
+
+      if (res.ok && data.message === 'Cart cleared successfully') {
+        Swal.fire({
+          icon: 'success',
+          title: 'Successfully Checked Out',
+          text: 'Your order has been placed successfully.',
+        });
+        getCart(); // Refresh the cart after clearing
+      } else {
         Swal.fire({
           icon: 'error',
-          title: 'Error',
-          text: 'Something went wrong while clearing the cart. Please try again later.',
+          title: 'Clear Cart Failed',
+          text: data.message || 'There was an issue clearing the cart.',
         });
-      });*/
-  };
+      }
+    })
+    .catch((err) => {
+      console.error('Error clearing cart:', err);
+      Swal.fire({
+        icon: 'error',
+        title: 'Error',
+        text: 'Something went wrong while clearing the cart. Please try again later.',
+      });
+    });
+};
+
+
+// Handle clear cart
+const handleClearCart = () => {
+  fetch(`${process.env.REACT_APP_API_BASE_URL}/cart/clear-cart`, {
+    method: 'PUT', // Use PUT to match your backend
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${localStorage.getItem('token')}`,
+    },
+  })
+    .then(async (res) => {
+      const data = await res.json();
+
+      if (res.ok && data.message === 'Cart cleared successfully') {
+        Swal.fire({
+          icon: 'success',
+          title: 'Cart Cleared',
+          text: 'Your cart has been cleared successfully.',
+        });
+        getCart(); // Refresh the cart after clearing
+      } else {
+        Swal.fire({
+          icon: 'error',
+          title: 'Clear Cart Failed',
+          text: data.message || 'There was an issue clearing the cart.',
+        });
+      }
+    })
+    .catch((err) => {
+      console.error('Error clearing cart:', err);
+      Swal.fire({
+        icon: 'error',
+        title: 'Error',
+        text: 'Something went wrong while clearing the cart. Please try again later.',
+      });
+    });
+};
+  
 
   return (
     <>
@@ -230,17 +291,17 @@ export default function CartView() {
                   {cartItems.map((data, index) => (
                     <tr key={data._id}>
                       
-                      <td>{data.productId?.name || 'Unnamed Product'}</td>
+                      <td>{data.name}</td>
                       <td>
-                        {data.productId?.price
-                          ? `₱${data.productId.price.toFixed(2)}`
+                        {data.price
+                          ? `₱${data.price}`
                           : 'N/A'}
                       </td>
                       <td>
                         <InputGroup className="mb-3">
                           <Button
                             variant="outline-secondary"
-                            onClick={() => updateCartQuantity(data._id, data.quantity - 1)}
+                            onClick={() => updateCartQuantity(data.productId, data.quantity - 1)}
                           >
                             -
                           </Button>
@@ -251,17 +312,17 @@ export default function CartView() {
                           />
                           <Button
                             variant="outline-secondary"
-                            onClick={() => updateCartQuantity(data._id, data.quantity + 1)}
+                            onClick={() => updateCartQuantity(data.productId, data.quantity + 1)}
                           >
                             +
                           </Button>
                         </InputGroup>
                       </td>
-                      <td>₱{data.subtotal.toFixed(2)}</td>
+                      <td>₱{data.subtotal}</td>
                       <td>
                         <button
                           className="btn btn-danger btn-sm"
-                          onClick={() => removeFromCart(data._id)}
+                          onClick={() => removeFromCart(data.productId)}
                         >
                           Remove
                         </button>
@@ -304,5 +365,6 @@ export default function CartView() {
         )
       ) : null}
     </>
+
   );
 }

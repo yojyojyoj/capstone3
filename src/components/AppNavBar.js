@@ -40,6 +40,7 @@ export default function AppNavBar(){
 
 		            		<>
 		            			<Nav.Link className="text-light" as={NavLink} to="/cart" exact="true">Cart</Nav.Link>
+		            			<Nav.Link className="text-light" as={NavLink} to="/orders/my-orders" exact="true">My Orders</Nav.Link>
 		            			<Nav.Link className="text-light" as={NavLink} to="/profile" exact="true">Profile</Nav.Link>
 		            			<Nav.Link className="text-light" as={NavLink} to="/logout" exact="true">Logout</Nav.Link>
 		            		</>

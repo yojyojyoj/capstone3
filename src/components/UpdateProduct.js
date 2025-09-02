@@ -7,7 +7,7 @@ import {Notyf} from 'notyf';
 export default function UpdateProduct({product, fetchData}){
 
 
-		const notyf =new Notyf();
+		const notyf = new Notyf();
 
 		const [show, setShow] = useState(false);
 
@@ -15,7 +15,6 @@ export default function UpdateProduct({product, fetchData}){
 		const handleShow = () => setShow(true);
 
 		const [productId, setProductId] = useState(product._id);
-
 		const [name, setName] = useState(product.name);
 		const [description, setDescription] = useState(product.description);
 		const [price, setPrice] = useState(product.price);
@@ -39,15 +38,18 @@ export default function UpdateProduct({product, fetchData}){
 			})
 			.then(response => response.json())
 			.then(data => {
-				if(data.success=== true){
-					notyf.success('Successfully Updated!')
+				if(data === 'Product not found'){
+					notyf.error('Product not found');
 					fetchData();
 					handleClose();
+					
 				}else{
-					notyf.error('Something went wrong!');
+					notyf.success('Product updated successfully');
 					fetchData();
 					handleClose();
 				}
+
+				console.log(data)
 			})
 		}
 

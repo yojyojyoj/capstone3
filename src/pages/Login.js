@@ -112,9 +112,9 @@ export default function Login() {
             ?
             <Navigate to='/'/>
             :    
-            <Form onSubmit={(e) => authenticate(e)}>
+            <Form className="col-6 mx-auto" onSubmit={(e) => authenticate(e)}>
             <h1 className="my-5 text-center">Login</h1>
-                <Card className= "p-3"> 
+                <Card className= "p-5"> 
                     <Form.Group>
                         <Form.Label>Email address</Form.Label>
                         <Form.Control 

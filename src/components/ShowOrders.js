@@ -1,78 +1,86 @@
-import '../index.css';
-import { useState, useEffect } from 'react';
-import { Button, Table, Row, Col } from 'react-bootstrap';
+import React, { useState, useEffect, useContext } from 'react';
+import UserContext from '../context/UserContext';
+import Swal from 'sweetalert2';
 
-// Import the button
-import UpdateProduct from './UpdateProduct';
-import ArchiveProducts from './ArchiveProducts';
-import AddProduct from './AddProduct';
+export default function MyOrders() {
+  const { user } = useContext(UserContext);
+  const [orders, setOrders] = useState([]);
+  const [loading, setLoading] = useState(true);
 
+  useEffect(() => {
+    if (!user?.id) {
+      setLoading(false);
+      return;
+    }
 
+    fetch(`${process.env.REACT_APP_API_BASE_URL}/orders/my-orders`, {
+      method: 'GET',
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem('token')}`,
+      },
+    })
+      .then(async (res) => {
+        const data = await res.json();
 
-export default function AdminView({ productsData, fetchData }) {
+        if (res.ok) {
+          setOrders(data.orders);
+        } else if (res.status === 404) {
+          Swal.fire({
+            icon: 'info',
+            title: 'No Orders',
+            text: data.message || 'You have no orders yet.',
+          });
+          setOrders([]);
+        } else {
+          Swal.fire({
+            icon: 'error',
+            title: 'Error',
+            text: data.message || 'Failed to fetch your orders.',
+          });
+        }
+        setLoading(false);
+      })
+      .catch((err) => {
+        console.error('Error fetching orders:', err);
+        Swal.fire({
+          icon: 'error',
+          title: 'Error',
+          text: 'Something went wrong while fetching orders.',
+        });
+        setLoading(false);
+      });
+  }, [user]);
 
+  if (!user?.id) {
+    return <p>Please log in to view your orders.</p>;
+  }
 
-    const [products, setProducts] = useState([])
+  if (loading) {
+    return <p>Loading your orders...</p>;
+  }
 
+  if (orders.length === 0) {
+    return <p>You have no orders yet.</p>;
+  }
 
-    useEffect(() => {
-
-        const productsArr = productsData.map(product => {
-            return (
-                <tr key={product._id} className = "text-center">
-                    {/*<td>{product._id}</td>*/}
-                    <td>{product.name}</td>
-                    <td>{product.description}</td>
-                    <td>{product.price}</td>
-                    <td className={product.isActive ? "text-success" : "text-danger"}>
-                        {product.isActive ? "Available" : "Unavailable"}
-                    </td>
-                    <td className="text-center">
-                        <UpdateProduct product = {product} fetchData = {fetchData}/>
-                    </td>
-                    {<td><ArchiveProducts product={product} isActive={product.isActive} fetchData={fetchData}/></td>}
-                </tr>
-                )
-        })
-
-        setProducts(productsArr)
-
-    }, [productsData])
-
-
-    return(
-        <>
-        <Row className = "text-center">
-            <Col>
-             <h1 className="text-center my-4"> Admin Dashboard </h1>
-            </Col>
-        </Row>
-
-        <Row className = "text-center">
-            <Col>
-            <AddProduct product = {products} fetchData = {fetchData}/>
-            <Button className="me-3 mb-4 bg-success">Orders</Button>
-            </Col>
-        </Row>
-            
-            
-            <Table striped bordered hover responsive variant = "success">
-                <thead>
-                    <tr className="text-center">
-                        {/*<th>ID</th>*/}
-                        <th>Name</th>
-                        <th>Description</th>
-                        <th>Price</th>
-                        <th>Availability</th>
-                        <th colSpan="2">Actions</th>
-                    </tr>
-                </thead>
-
-                <tbody>
-                    {products}
-                </tbody>
-            </Table>    
-        </>
-
-        )
+  return (
+    <div className="my-orders-container">
+      <h2>My Orders</h2>
+      {orders.map((order) => (
+        <div key={order._id} className="order-card" style={{border: '1px solid #ccc', padding: '1rem', marginBottom: '1rem'}}>
+          <h4>Order ID: {order._id}</h4>
+          <p><strong>Total Price:</strong> ₱{order.totalPrice.toFixed(2)}</p>
+          <p><strong>Products Ordered:</strong></p>
+          <ul>
+            {order.productsOrdered.map((product, idx) => (
+              <li key={idx}>
+                Product ID: {product.productId} — Quantity: {product.quantity} — Subtotal: ₱{product.subtotal.toFixed(2)}
+              </li>
+            ))}
+          </ul>
+          {/* You can format date/time or add more order info here */}
+        </div>
+      ))}
+    </div>
+  );
 }
