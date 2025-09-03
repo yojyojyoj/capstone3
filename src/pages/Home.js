@@ -1,6 +1,4 @@
 import Banner from '../components/Banner';
-// import Highlights from '../components/Highlights';
-// import CourseCard from '../components/CourseCard';
 import FeaturedProducts from '../components/FeaturedProducts';
 import CarouselHome from '../components/CarouselHome'
 
@@ -14,13 +12,11 @@ export default function Home(){
 	
 	return (
 		<>
-		<div>
-			<Banner className= "justify-content-center" data = {data}/>
-			< br/>
-			<CarouselHome />
+		<div className="w-100 m-0 p-0">
+			<Banner className= "justify-content-center" data = {data}/>			
 		</div>
 		<div>
-			
+			<CarouselHome />
 			<FeaturedProducts />
 		</div>
 		</>
