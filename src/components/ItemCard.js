@@ -93,11 +93,11 @@ export default function ItemCard({item, productsData}) {
             <Card.Body>
                 <Card.Title>{name}</Card.Title>
                 <Card.Subtitle>Price:</Card.Subtitle>
-                <Card.Text>{totalPrice}</Card.Text>
+                <Card.Text>₱{totalPrice}</Card.Text>
                 <Card.Subtitle>Quantity:</Card.Subtitle>
                 <Card.Text>{quantity}</Card.Text> 
                 <Card.Subtitle>Subtotal:</Card.Subtitle>
-                <Card.Text>{subtotal}</Card.Text>           
+                <Card.Text>₱{subtotal}</Card.Text>           
             </Card.Body>
             <Card.Footer className="d-flex justify-content-around">
                 <button className="btn btn-primary btn-sm" onClick={() => updateCartQuantity(_id)}>Update</button>

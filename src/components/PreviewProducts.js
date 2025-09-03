@@ -8,19 +8,19 @@ export default function PreviewProducts(props){
 	const {_id, name, description, price} = data;
 
 	return(
-		<Col className = "col-2">
+		<Col className="my-3" xs={12} sm={4} md={4} lg={2} >
 		    {/*Adding the class cardHighlight for min-height*/}
 		    <Card className="cardHighlight">
-		        <Card.Body>
+		        <Card.Body  style={{ backgroundColor: 'rgb(96, 108, 98)' }}>
 		            <Card.Title className="text-center">
-		                <Link to = {`/products/${_id}`}>{name}</Link>
+		                <Link className="text-white" style={{ textDecoration: 'none' }} to = {`/products/${_id}`}>{name}</Link>
 		            </Card.Title>
-		            <Card.Text className="text-center">{description}</Card.Text>
+		            <Card.Text className="text-center text-white">{description}</Card.Text>
 		                    
 		        </Card.Body>
-		        <Card.Footer>
-		            <h5 className="text-center">{price}</h5>
-		            <Link className="btn btn-primary d-block" to = {`/products/${_id}`}>Details</Link>
+		        <Card.Footer style={{ backgroundColor: 'rgb(253, 251, 238)' }}>
+		            <h5 className="text-center">₱{price.toFixed(2)}</h5>
+		            <Link className="btn d-block text-white" style={{ backgroundColor: 'rgb(120, 160, 168)' }} to = {`/products/${_id}`}>Details</Link>
 		        </Card.Footer>
 		    </Card>
 		</Col>

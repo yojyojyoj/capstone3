@@ -29,7 +29,6 @@ export default function ProductsCatalog() {
             
             console.log(data);
 
-            // Sets the "courses" state to map the data retrieved from the fetch request into several "CourseCard" components
             setProducts(data);
 
         });

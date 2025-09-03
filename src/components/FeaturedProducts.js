@@ -45,7 +45,7 @@ export default function FeaturedProducts() {
 
     return (
         <>
-            <h2 className="text-center my-5">Featured Products</h2>
+            <h2 className="text-center my-5" style={{ color: 'rgb(63, 41, 43)' }}>Featured Products</h2>
             <CardGroup className="justify-content-around">
                 {previews}
             </CardGroup>

@@ -44,10 +44,10 @@ export default function Profile(){
 
     return (
         (user._id === null) ?
-            <Navigate to="/products" />
+            <Navigate to="/products" /> 
             :
             <Container className="mt-5 p-5 text-white">               
-            <Row className ="bg-primary">
+            <Row style={{ backgroundColor: 'rgb(149, 150, 136)' }}>
                 <h1 className="mb-5 ">Profile</h1>
                 <h2 className="mt-3">{`${details.firstName} ${details.lastName}`}</h2>
                 <hr />

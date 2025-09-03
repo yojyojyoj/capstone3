@@ -17,7 +17,7 @@ export default function ProductsCard({productProp}) {
                 <Card.Subtitle>Description:</Card.Subtitle>
                 <Card.Text>{description}</Card.Text>
                 <Card.Subtitle className = "mt-auto">Price:</Card.Subtitle>
-                <Card.Text className = "text-danger">{price}</Card.Text>
+                <Card.Text className = "text-danger">₱{price}</Card.Text>
 
                 <Link className = "btn btn-primary" to = {`/products/${_id}`} >Details</Link>
             </Card.Body>
