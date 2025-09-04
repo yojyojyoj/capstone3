@@ -9,7 +9,6 @@ export default function PreviewProducts(props){
 
 	return(
 		<Col className="my-3" xs={12} sm={4} md={4} lg={2} >
-		    {/*Adding the class cardHighlight for min-height*/}
 		    <Card className="cardHighlight">
 		        <Card.Body  style={{ backgroundColor: 'rgb(96, 108, 98)' }}>
 		            <Card.Title className="text-center">

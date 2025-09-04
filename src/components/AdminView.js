@@ -6,8 +6,8 @@ import AddProduct from './AddProduct';
 
 export default function AdminView({ productsData, fetchData }) {
   const [products, setProducts] = useState([]);
-  const [orders, setOrders] = useState([]); // State for orders
-  const [showOrders, setShowOrders] = useState(false); // Flag to toggle orders visibility
+  const [orders, setOrders] = useState([]);
+  const [showOrders, setShowOrders] = useState(false); 
 
   useEffect(() => {
     const productsArr = productsData.map(product => (
@@ -62,8 +62,26 @@ export default function AdminView({ productsData, fetchData }) {
 
       <Row className="text-center">
         <Col>
+        
           <AddProduct product={products} fetchData={fetchData} />
-          <Button className="me-3 mb-4 bg-success" onClick={fetchOrders}>Orders</Button>
+
+          {showOrders ? (
+                <Button className="me-3 mb-4"
+                  style={{ backgroundColor: 'rgb(114, 158, 161)', border: 'none' }}
+                  onClick={() => setShowOrders(false)}>
+                  <strong>
+                  Products
+                  </strong>
+                </Button>
+              ) : (
+                <Button className="me-3 mb-4"
+                  style={{ backgroundColor: 'rgb(230, 138, 117)', border: 'none' }}
+                  onClick={fetchOrders}>
+                  <strong>
+                  Orders
+                  </strong>
+                </Button>
+              )}
         </Col>
       </Row>
 
@@ -76,7 +94,7 @@ export default function AdminView({ productsData, fetchData }) {
                   <Card.Body>
                     <Card.Title variant="dark">Orders for user: {order.userId}</Card.Title>
                     <Card.Subtitle className="mb-2 text-muted">Status: {order.status}</Card.Subtitle>
-                    <Card.Text>Total Price: ${order.totalPrice}</Card.Text>
+                    <Card.Text>Total Price: ₱{order.totalPrice}</Card.Text>
                     <h5>Products Ordered:</h5>
                     {order.productsOrdered.map((productOrdered, index) => {
                       // Find the product that matches the productId in productsData
@@ -85,7 +103,7 @@ export default function AdminView({ productsData, fetchData }) {
                         <div key={index}>
                           <h6>{orderedProduct ? orderedProduct.name : "Product not found"}</h6>
                           <p>Quantity: {productOrdered.quantity}</p>
-                          <p>Subtotal: ${productOrdered.subtotal}</p>
+                          <p>Subtotal: ₱{productOrdered.subtotal}</p>
                         </div>
                       );
                     })}
@@ -105,24 +123,27 @@ export default function AdminView({ productsData, fetchData }) {
         </Row>
       )}
 
-      <Row>
-        <Col>
-          <Table striped bordered hover responsive variant="success">
-            <thead>
-              <tr className="text-center">
-                <th>Name</th>
-                <th>Description</th>
-                <th>Price</th>
-                <th>Availability</th>
-                <th colSpan="2">Actions</th>
-              </tr>
-            </thead>
-            <tbody>
-              {products}
-            </tbody>
-          </Table>
-        </Col>
-      </Row>
+      {!showOrders && (
+        <Row>
+          <Col>
+            <Table bordered hover responsive variant="secondary">
+              <thead>
+                <tr className="text-center">
+                  <th>Name</th>
+                  <th>Description</th>
+                  <th>Price</th>
+                  <th>Availability</th>
+                  <th colSpan="2">Actions</th>
+                </tr>
+              </thead>
+              <tbody>
+                {products}
+              </tbody>
+            </Table>
+          </Col>
+        </Row>
+      )}
+
     </>
   );
 }

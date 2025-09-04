@@ -57,7 +57,8 @@ export default function UpdateProduct({product, fetchData}){
 	
 	return (
 		<>
-			<Button variant = "primary" size = "sm" onClick={handleShow} >Update</Button>
+			<Button style={{ backgroundColor: 'rgb(114, 158, 161)',border: 'none' }} 
+				size = "sm" onClick={handleShow} >Update</Button>
 
 			<Modal show={show} onHide={handleClose}>
 			       <Modal.Header closeButton>

@@ -1,11 +1,10 @@
-import { Card, Button } from 'react-bootstrap';
+import { Card } from 'react-bootstrap';
 // import useState Hook from react:
 // import { useState } from'react';
 import {Link} from 'react-router-dom';
 
 export default function ProductsCard({productProp}) {
 
-    // console.log(props)
 
     const { name, description, price, _id} = productProp;
 

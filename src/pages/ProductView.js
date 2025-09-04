@@ -78,6 +78,7 @@ export default function ProductView() {
         <Col xs={12} sm={10} md={8} lg={6} xl={5}>
           <Card>
             <Card.Body>
+              
               <Card.Title>{name}</Card.Title>
               <Card.Subtitle className="mb-2 text-muted">Description</Card.Subtitle>
               <Card.Text>{description}</Card.Text>

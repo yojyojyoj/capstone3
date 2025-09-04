@@ -64,14 +64,24 @@ export default function ArchiveProducts({product, isActive, fetchData}) {
         <>
             {isActive ?
 
-                <Button variant="danger" size="sm" onClick={() => archiveToggle()}>Disable</Button>
+                <Button style={{ backgroundColor: 'rgb(230, 138, 117)',border: 'none' }}
+                 size="sm" 
+                 
+                 onClick={() => archiveToggle()}>Disable
+                </Button>
 
                 :
 
-                <Button variant="success" size="sm" onClick={() => activateToggle()}>Activate</Button>
+                <Button style={{ backgroundColor: 'rgb(160, 186, 139)',border: 'none' }}
+                 size="sm" 
+                 
+                 onClick={() => activateToggle()}>Activate
+                </Button>
 
             }
         </>
 
         )
 }
+
+// 

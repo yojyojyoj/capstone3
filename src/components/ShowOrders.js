@@ -78,7 +78,6 @@ export default function MyOrders() {
               </li>
             ))}
           </ul>
-          {/* You can format date/time or add more order info here */}
         </div>
       ))}
     </div>

@@ -1,4 +1,4 @@
-import { useState, useEffect, useContext } from 'react';
+import { useState, useContext } from 'react';
 import { Modal, Button, Form } from 'react-bootstrap';
 import { Navigate, useNavigate } from 'react-router-dom';
 
@@ -78,7 +78,9 @@ export default function AddProduct(){
             (user.isAdmin === true)
             ?
             <>
-                <Button className = "bg-primary me-3 mb-4" onClick={handleShow} >Add Product</Button>
+                <Button className = "me-3 mb-4"
+                style={{ backgroundColor: 'rgb(160, 186, 139)', border: 'none' }}
+                onClick={handleShow} ><strong>Add Product</strong></Button>
 
                 <Modal show={show} onHide={handleClose}>
                        <Modal.Header closeButton>
@@ -123,7 +125,9 @@ export default function AddProduct(){
                          <Button variant="secondary" onClick={handleClose}>
                            Close
                          </Button>
-                         <Button variant="success" onClick= {event => createProduct(event)}>
+                         <Button 
+                          style={{ backgroundColor: 'rgb(76, 139, 48)', border: 'none' }} 
+                          onClick= {event => createProduct(event)}>
                            Submit
                          </Button>
                        </Modal.Footer>
