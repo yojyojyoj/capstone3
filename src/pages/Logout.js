@@ -21,7 +21,7 @@ export default function Logout(){
 
 	}, [])
 
-	// localStorage.clear();
+	localStorage.clear();
 
 	return(
 

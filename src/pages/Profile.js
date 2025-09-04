@@ -1,10 +1,10 @@
 import { useState, useEffect, useContext } from 'react';
-import { Container, Row } from 'react-bootstrap';
+import { Container, Row, Col, Card } from 'react-bootstrap';
 import { Navigate } from 'react-router-dom';
 
 import UserContext from '../context/UserContext';
 // import ResetPassword from '../components/ResetPassword';
-// import UpdateProfile from '../components/UpdateProfile';
+import UpdatePassword from '../components/UpdatePassword';
 
 import {Notyf} from 'notyf';
 
@@ -46,26 +46,38 @@ export default function Profile(){
         (user._id === null) ?
             <Navigate to="/products" /> 
             :
-            <Container className="mt-5 p-5 text-white">               
-            <Row style={{ backgroundColor: 'rgb(149, 150, 136)' }}>
-                <h1 className="mb-5 ">Profile</h1>
-                <h2 className="mt-3">{`${details.firstName} ${details.lastName}`}</h2>
-                <hr />
-                <h4>Contacts</h4>
-                <ul>
-                    <li>Email: {details.email}</li>
-                    <li>Mobile No: {details.mobileNo}</li>
-                </ul>
-            </Row>
+            <Container className="mt-5 mb-5 p-4">
+            <Row className="justify-content-center">
+                <Col md={8}>
+                    <Card className="shadow-lg border-0">
+                        <Card.Header className="text-white text-center"
+                            style={{ backgroundColor: 'rgb(114, 158, 161)' }}>
+                            <h2 className="mb-0">User Profile</h2>
+                        </Card.Header>
 
-            <Row className = "bg-success">
-                {/*<ResetPassword />*/}
-            </Row>
-            <Row>
-            {/*<UpdateProfile />*/}
-            </Row>
+                        <Card.Body style={{ backgroundColor: 'rgb(253, 251, 238)' }}>
+                            <h3 className="text-center mb-4">{`${details.firstName} ${details.lastName}`}</h3>
 
-            </Container>
+                            <hr />
+
+                            <h5>Contact Information</h5>
+                            <ul className="list-unstyled">
+                                <li><strong>Email:</strong> {details.email}</li>
+                                <li><strong>Mobile No:</strong> {details.mobileNo}</li>
+                            </ul>
+                        </Card.Body>
+
+                        <Card.Footer className="d-flex justify-content-between"
+                        style={{ backgroundColor: 'rgb(253, 251, 238)' }}>
+                            {/* Add your components here */}
+                            {/* <ResetPassword /> */}
+                             <UpdatePassword /> 
+                            <span className="text-muted small">Last updated: Just now</span>
+                        </Card.Footer>
+                    </Card>
+                </Col>
+            </Row>
+        </Container>
     )
 
 }

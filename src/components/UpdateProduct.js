@@ -100,7 +100,6 @@ export default function UpdateProduct({product, fetchData}){
 			             	required/>
 			           </Form.Group>
 
-
 			         </Form>
 			       </Modal.Body>
 			       <Modal.Footer>
