@@ -277,7 +277,12 @@ export default function CartView() {
       {user ? (
         cartItems.length > 0 ? (
           <>
-            <h1 className="text-center mt-5">My Cart</h1>
+            <h1 className="text-center mt-5"
+                style={{ color: 'rgb(63, 41, 43)' }}
+>
+              My Cart
+            </h1>
+
             <div className="table-responsive mt-4">
               <table className="table table-bordered table-striped">
                 <thead>
@@ -325,9 +330,9 @@ export default function CartView() {
                         <td>₱{data.subtotal?.toFixed(2)}</td>
                         <td>
                           <button
-                            className="btn btn-danger btn-sm"
-                            onClick={() => removeFromCart(data.productId)}
-                          >
+                            className="btn btn-md text-light"
+                            style={{ backgroundColor: 'rgb(230, 138, 117)', border: 'none' }}
+                            onClick={() => removeFromCart(data.productId)}>
                             Remove
                           </button>
                         </td>
@@ -337,25 +342,32 @@ export default function CartView() {
                 </tbody>
                 <tfoot>
                   <tr>
+
                     <td colSpan="2">
                       <div className="text-center">
-                        <Button variant="success" onClick={handleCheckout}>
+                        <Button 
+                          style={{ backgroundColor: 'rgb(160, 186, 139)', border: 'none' }}
+                          onClick={handleCheckout}>
                           Proceed to Checkout
                         </Button>
                       </div>
                     </td>
+
                     <td colSpan="2" className="text-end">
                       <strong>Total Price:</strong>
                     </td>
+
                     <td colSpan="4">
                       <strong>₱{totalPrice.toFixed(2)}</strong>
                     </td>
+
                   </tr>
                 </tfoot>
               </table>
 
               <div className="text-start mt-3">
-                <Button variant="danger" onClick={handleClearCart}>
+                <Button style={{ backgroundColor: 'rgb(114, 158, 161)', border: 'none' }}
+                  onClick={handleClearCart}>
                   Clear Cart
                 </Button>
               </div>
@@ -365,7 +377,8 @@ export default function CartView() {
           <h4 className="text-center mt-5">
             Your cart is empty! 
             <div className="text-center mt-4">
-              <Button variant="success" onClick={() => navigate('/products')}>
+              <Button style={{ backgroundColor: 'rgb(160, 186, 139)', border: 'none' }}
+                  onClick={() => navigate('/products')}>
                     Start shopping
               </Button>
             </div>

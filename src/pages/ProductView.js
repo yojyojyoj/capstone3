@@ -76,17 +76,21 @@ export default function ProductView() {
     <Container className="mt-5">
       <Row className="justify-content-center">
         <Col xs={12} sm={10} md={8} lg={6} xl={5}>
-          <Card>
+          <Card style={{ backgroundColor: 'rgb(253, 251, 238)' }}>
             <Card.Body>
               
-              <Card.Title>{name}</Card.Title>
-              <Card.Subtitle className="mb-2 text-muted">Description</Card.Subtitle>
+              <Card.Title className="text-center"
+                style={{ color: 'rgb(96, 108, 98)' }}>
+                <strong>{name}</strong>
+              </Card.Title>
+
+              <Card.Subtitle className="mb-2 text-muted"><strong>Description</strong></Card.Subtitle>
               <Card.Text>{description}</Card.Text>
 
-              <Card.Subtitle className="mb-2 text-muted">Price</Card.Subtitle>
+              <Card.Subtitle className="mb-2 text-muted"><strong>Price</strong></Card.Subtitle>
               <Card.Text>₱{price.toFixed(2)}</Card.Text>
 
-              <Card.Subtitle className="mb-2 text-muted">Quantity</Card.Subtitle>
+              <Card.Subtitle className="mb-2 text-muted"><strong>Quantity</strong></Card.Subtitle>
 
               <InputGroup className="mb-3" style={{ maxWidth: '180px' }}>
                 <Button variant="outline-secondary" onClick={decreaseQuantity}>
@@ -97,7 +101,7 @@ export default function ProductView() {
                   aria-label="Quantity"
                   value={quantity}
                   readOnly
-                  style={{ maxWidth: '60px' }} // Control the input box width
+                  style={{ maxWidth: '60px', backgroundColor: 'rgb(253, 251, 238)' }} 
                 />
                 <Button variant="outline-secondary" onClick={increaseQuantity}>
                   +
@@ -106,7 +110,9 @@ export default function ProductView() {
 
 
               {/* Display the total price based on quantity */}
-              <Card.Text><strong>Total: </strong>₱{(price * quantity).toFixed(2)}</Card.Text>
+              <Card.Text><strong>Total: </strong> 
+                    <h3 style={{ color: 'rgb(76, 139, 48)' }}>₱{(price * quantity).toFixed(2)}</h3>
+              </Card.Text>
 
               {
                 user.id !== null ? (  // Check if the user is logged in
@@ -116,10 +122,12 @@ export default function ProductView() {
                     </Button>
                   ) : (  // If the user is logged in but not an admin
                     <div className="d-flex justify-content-between align-items-center mt-3">
-                    <Button variant="primary" onClick={() => navigate('/products')}>
+                    <Button style={{ backgroundColor: 'rgb(114, 158, 161)', border: 'none' }}
+                        onClick={() => navigate('/products')}>
                       Back
                     </Button>
-                    <Button className="my-end" variant="success" onClick={() => addToCart(productId, quantity)}>
+                    <Button className="my-end" style={{ backgroundColor: 'rgb(230, 138, 117)', border: 'none' }}
+                       onClick={() => addToCart(productId, quantity)}>
                       Add To Cart
                     </Button>
                   </div>

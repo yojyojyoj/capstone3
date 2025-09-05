@@ -67,7 +67,8 @@ const ProductSearch = ({ products }) => {
         <Col md={8} lg={6}>
           <Card>
             <Card.Body>
-              <h3 className="text-center mb-4">Search Products</h3>
+              <h3 className="text-center mb-4" style={{ color: 'rgb(96, 108, 98)' }}>
+                Search Products</h3>
               <Form>
                 <Form.Group controlId="search" className="mb-3">
                   <Form.Control
@@ -97,14 +98,19 @@ const ProductSearch = ({ products }) => {
                   </Col>
                 </Row>
 
-                <ButtonGroup className="w-100 mb-3">
-                  <Button variant="success" onClick={handlePriceSearch}>
-                    Search by Price
-                  </Button>
-                  <Button variant="secondary" onClick={handleReset}>
-                    Reset
-                  </Button>
-                </ButtonGroup>
+                
+                 <div className="d-flex">
+                   <Button style={{ backgroundColor: 'rgb(149, 150, 136)', border: 'none' }} 
+                      onClick={handlePriceSearch}>
+                     Search by Price
+                   </Button>
+                   <div className="ms-auto">
+                     <Button className="me-3" variant="secondary" onClick={handleReset}>
+                       Reset
+                     </Button>
+                   </div>
+                 </div>
+                
 
                 {error && (
                   <div className="text-danger text-center mb-3">{error}</div>
