@@ -22,7 +22,14 @@ export default function AppNavBar(){
 	return (
 		<Navbar id = "nav" expand="lg" className="text-light" sticky="top">
 		      <Container>
-		        <Navbar.Brand className="text-light" as={NavLink} to="/">GY</Navbar.Brand>
+		        <Navbar.Brand as={NavLink} to="/" className="d-flex align-items-center">
+		          <img
+		            src="/logo.png"
+		            alt="Logo"
+		            className="img-fluid d-inline-block align-top"
+		            style={{ maxHeight: '40px' }}
+		          />
+		        </Navbar.Brand>
 		        <Navbar.Toggle aria-controls="basic-navbar-nav" />
 		        <Navbar.Collapse id="basic-navbar-nav">
 		          <Nav className="ms-auto">
