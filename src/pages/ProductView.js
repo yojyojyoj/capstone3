@@ -33,6 +33,7 @@ export default function ProductView() {
     if (quantity > 1) setQuantity(quantity - 1); // Decrease quantity (don't go below 1)
   };
 
+
   // Function to handle adding the product to the cart
   const addToCart = (productId, quantity) => {
 
@@ -117,9 +118,15 @@ export default function ProductView() {
               {
                 user.id !== null ? (  // Check if the user is logged in
                   user.isAdmin ? (  // Check if the logged-in user is an admin
+                    <div className="d-flex justify-content-between align-items-center mt-3">
+                    <Button style={{ backgroundColor: 'rgb(114, 158, 161)', border: 'none' }}
+                        onClick={() => navigate('/products')}>
+                      Back
+                    </Button>
                     <Button variant="danger" disabled>
                       Admin can't add
                     </Button>
+                    </div>
                   ) : (  // If the user is logged in but not an admin
                     <div className="d-flex justify-content-between align-items-center mt-3">
                     <Button style={{ backgroundColor: 'rgb(114, 158, 161)', border: 'none' }}

@@ -32,7 +32,8 @@ export default function AppNavBar(){
 		            {(user.id !== null)?
 		            		(user.isAdmin) ? 
 		            		<>
-		            			
+		            			<Nav.Link className="text-light" as={NavLink} to="/profile" exact="true">Profile</Nav.Link>
+		            			<Nav.Link className="text-light" as = {NavLink} to = "/users/:id/set-as-admin">Users</Nav.Link>
 		            			<Nav.Link className="text-light" as = {NavLink} to = "/logout">Logout</Nav.Link>
 		            		</>
 

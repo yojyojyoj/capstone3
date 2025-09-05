@@ -18,7 +18,6 @@ export default function ProductsCatalog() {
         let fetchUrl = user.isAdmin === true ? `${process.env.REACT_APP_API_BASE_URL}/products/all` : `${process.env.REACT_APP_API_BASE_URL}/products/active`;
         console.log(fetchUrl)
 
-        //get all active courses
         fetch(fetchUrl, {
             headers : {
                 'Authorization' : `Bearer ${localStorage.getItem('token')}`

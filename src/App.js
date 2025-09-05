@@ -14,6 +14,7 @@ import ProductView from './pages/ProductView';
 import Cart from './pages/Cart';
 import CartView from './components/CartView';
 import MyOrders from './pages/MyOrders';
+import PromoteUserToAdmin from './pages/UpdateAsAdmin';
 
 import { Container } from 'react-bootstrap';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
@@ -34,14 +35,14 @@ function App() {
     }
 
 
-    /*useEffect(() => {
+    useEffect(() => {
       console.log(user);
       console.log(localStorage);
       
-    }, [user])*/
+    }, [user])
 
     // This fetch the user details to set as its user state.
-    useEffect(()=> {
+   /* useEffect(()=> {
         //fetch to retrieve the user details
       
       if(localStorage.getItem('token')){
@@ -76,14 +77,41 @@ function App() {
       }
 
     }, [])
+*/
 
+    const fetchUserDetails = () => {
+      const token = localStorage.getItem('token');
+      if (token) {
+        fetch(`${process.env.REACT_APP_API_BASE_URL}/users/details`, {
+          headers: {
+            Authorization: `Bearer ${token}`
+          }
+        })
+          .then(res => res.json())
+          .then(data => {
+            if (data.user?._id) {
+              setUser({
+                id: data.user._id,
+                isAdmin: data.user.isAdmin,
+              });
+            } else {
+              setUser({ id: null, isAdmin: null });
+            }
+          })
+          .catch(() => setUser({ id: null, isAdmin: null }));
+      } else {
+        setUser({ id: null, isAdmin: null });
+      }
+    };
 
-    
+useEffect(() => {
+    fetchUserDetails();
+  }, []);
 
 
   return (
     <>
-        <UserProvider value = {{user, setUser, unsetUser}}>
+        <UserProvider value = {{user, setUser, unsetUser, fetchUserDetails }}>
             <Router>
               <AppNavBar/>
               <Container>
@@ -97,6 +125,7 @@ function App() {
                   <Route path="/products" element={<ProductsCatalog />} />
                   <Route path="/products/:productId" element={<ProductView />} />
                   <Route path="/orders/my-orders" element={<MyOrders />} />
+                  <Route path="/users/:id/set-as-admin" element={<PromoteUserToAdmin />} />
                   <Route path="*" element={<Error />} />
                 </Routes>
               </Container>
