@@ -35,11 +35,11 @@ function App() {
     }
 
 
-    useEffect(() => {
-      console.log(user);
-      console.log(localStorage);
+    // useEffect(() => {
+    //   console.log(user);
+    //   console.log(localStorage);
       
-    }, [user])
+    // }, [user])
 
     // This fetch the user details to set as its user state.
    /* useEffect(()=> {
